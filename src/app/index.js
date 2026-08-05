@@ -2,11 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import {
   Image,
   Platform,
+  Pressable,
   StatusBar as RNStatusBar,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useRouter } from 'expo-router';
 
 
 const USERS = [
@@ -37,13 +40,19 @@ function UserCard({ user }) {
 }
 
 export default function App() {
+
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
 
       <View style={styles.header}>
-        <Image source={require('./assets/icon.png')} style={styles.logo} />
+        <Image source={{ uri: '../../assets/icon.png' }} style={styles.logo} />
         <Text style={styles.appName}>Meu App Robert React Native</Text>
+        <Pressable style={styles.iconUser} onPress={() => router.push('/contact')}>
+          <FontAwesome name="user-plus" size={24} color="#fff" />
+        </Pressable>
       </View>
 
       <View style={styles.content}>
@@ -123,4 +132,7 @@ const styles = StyleSheet.create({
     color: '#64748b',
     marginTop: 2,
   },
+  iconUser: {
+    marginLeft: 'auto'
+  }
 });
